@@ -99,7 +99,7 @@ pub fn wait_for(dur: f64) -> Result<bool, FltkError> {
         }
         match fl::Fl_wait_for(dur) as i32 {
             0 => Ok(false),
-            1 => Ok(true),
+            n if n > 0 => Ok(true),
             _ => Err(FltkError::Unknown(String::from(
                 "The event loop was probably interrupted by an OS signal!",
             ))),
